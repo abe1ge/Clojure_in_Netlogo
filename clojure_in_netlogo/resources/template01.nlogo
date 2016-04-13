@@ -30,7 +30,7 @@ end
 
 
 to running [#fn #1 #2]
-  let answer clojure1 #fn #1 #2
+  let answer clj #fn #1 #2
 
 end
 ;================================================================================================================================================================
@@ -53,7 +53,7 @@ to clojure [#fn #arg1 #arg2]
 
 end
 
-to-report clojure1 [#fn #arg1 #arg2]
+to-report clj [#fn #arg1 #arg2]
 
   sock2:write (word #fn " " #arg1" "#arg2)
   output-print (word "sent to cj: " #fn " "#arg1" " #arg2)

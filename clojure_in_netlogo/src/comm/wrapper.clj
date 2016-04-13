@@ -3,7 +3,6 @@
            [clojure.string :as str]
            [clojure.pprint :refer :all]
            )
-  (use [clojure.string :only (split)])
   )
 
 (import '(java.net ServerSocket Socket SocketException)
@@ -52,50 +51,36 @@
 ;___ netlogo reading/writing _____________
 
 (
-  defn set-shrdlu-comms [port]
+  defn set-shrdlu-comms
+  "set"
+  [port]
   (def shrdlu-comms (startup-server port)))
 
 (defn startup [port]
-
+  "if port num is not in use
+  create a socket on that port and advertise
+  "
   (set-shrdlu-comms port)
 
   )
-(defn nlogo-send [txt]
+(defn nlogo-send
+  "send a string to netlogo"
+  [txt]
   ;(println '** (and shrdlu-comms true) txt)
   (if shrdlu-comms (socket-write shrdlu-comms txt)))
 
-(defn nlogo-read []
+(defn nlogo-read
+  "Read from the socket"
+  []
   (if shrdlu-comms (socket-read shrdlu-comms)))
 
-(defn nlogo-io-waiting []
+(defn nlogo-io-waiting
+  "checks if socket is connected"
+  []
   (and shrdlu-comms (socket-input-waiting shrdlu-comms)))
 
 
 
-
-(defn nlogo-send-exec [times]
-  (nlogo-send (str "finrepl " times))
-  ;(crt-rabbits times)
-  )
-
-
-(defn concat-all [coll]
-  (join " " coll))
-
-
-(defn n-logosend1
-  [results]
-
-  (nlogo-send '(startup))
-  (def one (count [:cmds results]))
-  (def two "finrepl")
-  (prn (count (:cmds results)))
-  (nlogo-send (list two one))
-  ()
-  (doall (map nlogo-send-exec (:cmds results)))
-  (:cmds  results)
-
-  )
 
 
 
