@@ -1,7 +1,5 @@
 (ns comm.nexec
-  (require [comm.wrapper :refer :all]
-           [lib.numbers :refer :all])
-  (use [clojure.string :only (split)])
+  (require [comm.wrapper :refer :all])
   )
 
 (defn call
