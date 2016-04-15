@@ -9,5 +9,6 @@
   [& args]
   (println "Hello, World!")
 
+  (online?)
 
   )

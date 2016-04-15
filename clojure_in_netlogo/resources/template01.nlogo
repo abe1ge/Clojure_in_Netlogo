@@ -9,6 +9,7 @@ extensions [sock2]
 
 
 to setup
+  import-clj
   clear-all
   ask patches
   [
@@ -29,10 +30,6 @@ to go
 end
 
 
-to running [#fn #1 #2]
-  let answer clj #fn #1 #2
-
-end
 ;================================================================================================================================================================
 ; Clojure
 ;================================================================================================================================================================
@@ -53,14 +50,24 @@ to clojure [#fn #arg1 #arg2]
 
 end
 
-to-report clj [#fn #arg1 #arg2]
 
-  sock2:write (word #fn " " #arg1" "#arg2)
-  output-print (word "sent to cj: " #fn " "#arg1" " #arg2)
+;; use word to use clj multiple times
+;;e.g.
+;; clj (word "2 + 2 "(clj "3 + 7 5 4"))
+;;=> 18
+;;clj (word "1 first" (clj "2 split \"hello my name is\" #\" \""))
+;;"hello"
+
+to-report clj [#fun]
+  sock2:write #fun
+  output-print (word "sent to cj: " #fun)
   let clj-answer sock2:read
-  output-print clj-answer
   report clj-answer
+end
 
+to import-clj
+  sock2:write "1 use [clojure.string :only (split)]"
+  output-print (word "imported split" sock2:read)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -130,7 +137,7 @@ INPUTBOX
 582
 75
 port-num
-2222
+2223
 1
 0
 Number
