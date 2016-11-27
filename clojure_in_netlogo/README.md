@@ -21,7 +21,7 @@ FIXME:
 7. 
 
     clj "2 + 4 5)
-    #the first number is the number of arguments, the second item the function you want to use and the rest is the arguments
+    the first number is the number of arguments, the second item the function you want to use and the rest is the arguments
 9.
 
     $ java -jar clojure_in_netlogo-0.1.0-standalone.jar [args]
